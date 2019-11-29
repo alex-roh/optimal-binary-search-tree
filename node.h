@@ -3,8 +3,13 @@
 #include <cstdlib>
 using namespace std;
 
-// 노드를 구현하기 위한 클래스
 class node {
 public:
-	// Declare your own variables and functions here...
+	string data;
+	node* left_child;
+	node* right_child;
+	node();
+	node(string data, node* left, node* right);
+	void insertLeftChild(node* left);
+	void insertRightChild(node* right);
 };

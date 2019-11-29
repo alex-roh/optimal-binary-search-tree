@@ -8,19 +8,18 @@ bst::bst() {
 
 void bst::buildOptimalBST(string* words, int* p, int* q, int n) {
 	
-	// n = 5
-
 	int size = n + 2;
 
 	int** e = new int* [size];
 	int** w = new int* [size];
-	int** root = new int* [size];
+	int** r = new int* [size];
+	node* tree = new node [n + 1];
 
 	for (int i = 0; i < size; i++)
 	{
 		e[i] = new int[size];
 		w[i] = new int[size];
-		root[i] = new int[size];
+		r[i] = new int[size];
 	}
 
 	// 초기화
@@ -29,7 +28,7 @@ void bst::buildOptimalBST(string* words, int* p, int* q, int n) {
 		{
 			e[i][j] = 0;
 			w[i][j] = 0;
-			root[i][j] = 0;
+			r[i][j] = 0;
 		}
 	}
 
@@ -58,48 +57,70 @@ void bst::buildOptimalBST(string* words, int* p, int* q, int n) {
 				if (temp < e[i][j])
 				{
 					e[i][j] = temp;
-					root[i][j] = p;
+					r[i][j] = p;
 				}
 			}
 		}
 	}
 
+	this->putItems(r, tree, words, 1, n);
+	this->root = &tree[r[1][n]];
 
-
-
-
-	for (int i = 0; i < size; ++i) {
+	for (int i = 0; i < size; ++i)
+	{
 		delete[] e[i];
 		delete[] w[i];
-		delete[] root[i];
+		delete[] r[i];
 	}
 	delete[] e;
 	delete[] w;
-	delete[] root;
+	delete[] r;
+	delete[] tree;
 
-	this->putItems(words);
 	return;
 }
 
-void bst::putItems(string* word) {
-	// Insert source code here...
+void bst::putItems(int** r, node* tree, string* words, int i, int j) {
 
+	// 변수 선언
+	int p = r[i][j];
 
+	if (j >= i)
+	{
+		// 1. 전순위 탐방으로 노드를 생성
+		node* data = new node(*(words + p - 1), NULL, NULL);
+		tree[p] = *data; // tree 배열에 노드를 캐싱
 
+		// 2. 왼쪽 서브 트리 탐방
+		this->putItems(r, tree, words, i, p - 1);
 
+		// 3. 노드에 왼쪽 자식 노드(가상 키 x) 삽입
+		if (r[i][p - 1] != 0)
+		{
+			cout << "현재 키: " << data->data << endl;
+			data->left_child = &tree[r[i][p-1]];
+			cout << "키 " << data->data << "의 왼쪽 키: " << (data->left_child)->data << endl;
+		}
 
+		// 4. 오른쪽 서브 트리 탐방
+		this->putItems(r, tree, words, p + 1, j);
 
-
-
-
-
-
+		// 5. 노드의 오른쪽 자식 노드(가상 키 x)를 삽입
+		if (r[p + 1][j] != 0)
+		{
+			cout << "현재 키: " << data->data << endl;
+			data->right_child = &tree[r[p + 1][j]];
+			cout << "키 " << data->data << "의 오른쪽 키: " << (data->right_child)->data << endl;
+		}
+	}
 
 	return;
 }
 
 void bst::printTree(void) {
-	// Insert source code here...
+	
+	
+
 
 	return;
 }
