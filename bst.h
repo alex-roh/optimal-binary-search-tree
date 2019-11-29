@@ -7,7 +7,7 @@ using namespace std;
 class bst {
 private:
 	node* root;
-	void putItems(int** r, node* tree, string* word, int i, int j);
+	void putItems(int** r, node** tree, string* word, int i, int j);
 
 public:
 	bst();
