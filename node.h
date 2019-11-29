@@ -11,7 +11,9 @@ private:
 
 public:
 	node(string data, node* left, node* right);
-	void insertData(string data);
+	string getData();
+	node* getLeftChild();
+	node* getRightChild();
 	void insertLeftChild(node* left);
 	void insertRightChild(node* right);
 };

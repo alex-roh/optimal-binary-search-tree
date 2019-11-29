@@ -18,6 +18,7 @@ int main(void) {
 
 	// buildOptimalBST 안에서 printTree 함수를 호출합니다.
 	tree->buildOptimalBST(words, p, q, 5);
+	tree->printTree(tree->root, 0);
 
 	delete p, q, words;
 	delete tree;

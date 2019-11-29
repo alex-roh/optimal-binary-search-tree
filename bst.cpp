@@ -13,7 +13,7 @@ void bst::buildOptimalBST(string* words, int* p, int* q, int n) {
 	int** e = new int* [size];
 	int** w = new int* [size];
 	int** r = new int* [size];
-	node** tree = new node*[n + 1];
+	node** tree = new node*[n + 1]; // 노드 포인터들을 캐싱할 포인터 배열
 
 	for (int i = 0; i < size; i++)
 	{
@@ -94,7 +94,7 @@ void bst::putItems(int** r, node** tree, string* words, int i, int j) {
 		// 2. 왼쪽 서브 트리 탐방
 		this->putItems(r, tree, words, i, p - 1);
 
-		// 3. 노드에 왼쪽 자식 노드(가상 키 x) 삽입
+		// 3. 서브 트리의 루트 노드에 왼쪽 자식 노드 삽입
 		if (r[i][p - 1] != 0)
 		{
 			data->insertLeftChild(tree[r[i][p-1]]);
@@ -103,7 +103,7 @@ void bst::putItems(int** r, node** tree, string* words, int i, int j) {
 		// 4. 오른쪽 서브 트리 탐방
 		this->putItems(r, tree, words, p + 1, j);
 
-		// 5. 노드의 오른쪽 자식 노드(가상 키 x)를 삽입
+		// 5. 서브 트리의 루트 노드에 오른쪽 자식 노드 삽입
 		if (r[p + 1][j] != 0)
 		{
 			data->insertRightChild(tree[r[p + 1][j]]);
@@ -113,10 +113,30 @@ void bst::putItems(int** r, node** tree, string* words, int i, int j) {
 	return;
 }
 
-void bst::printTree(void) {
-	
-	
+void bst::printTree(node* node, int tab) 
+{
+	static int d_num = 0;
 
+	if (node != NULL)
+	{
+		for (int i = 0; i < tab; i++)
+		{
+			cout << '\t';
+		}
+		cout << node->getData() << endl;
+		tab++;
+		printTree(node->getLeftChild(), tab);
+		printTree(node->getRightChild(), tab);
+	}
+	else 
+	{
+		for (int i = 0; i < tab; i++)
+		{
+			cout << '\t';
+		}
+		cout << "d" << d_num++ << endl;
+		tab++;
+	}
 
 	return;
 }

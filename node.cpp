@@ -9,9 +9,19 @@ node::node(string data, node* left, node* right)
 	this->right_child = right;
 }
 
-void node::insertData(string data)
+string node::getData()
 {
-	this->data = data;
+	return this->data;
+}
+
+node* node::getLeftChild()
+{
+	return this->left_child;
+}
+
+node* node::getRightChild()
+{
+	return this->right_child;
 }
 
 void node::insertLeftChild(node* left)
