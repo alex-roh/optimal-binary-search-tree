@@ -64,10 +64,7 @@ void bst::buildOptimalBST(string* words, int* p, int* q, int n) {
 	}
 
 	this->putItems(r, tree, words, 1, n);
-	this->root = tree[r[1][n]];
-	cout << "루트 키 " << root->data << "의 왼쪽 키: " << (root->left_child)->data << endl;
-	cout << "루트 키 " << root->data << "의 오른쪽 키: " << (root->right_child)->data << endl;
-
+	this->root = tree[(r[1][n])];
 
 	for (int i = 0; i < size; ++i)
 	{
@@ -100,9 +97,7 @@ void bst::putItems(int** r, node** tree, string* words, int i, int j) {
 		// 3. 노드에 왼쪽 자식 노드(가상 키 x) 삽입
 		if (r[i][p - 1] != 0)
 		{
-			cout << "현재 키: " << data->data << endl;
-			data->left_child = tree[r[i][p-1]];
-			cout << "키 " << data->data << "의 왼쪽 키: " << (data->left_child)->data << endl;
+			data->insertLeftChild(tree[r[i][p-1]]);
 		}
 
 		// 4. 오른쪽 서브 트리 탐방
@@ -111,9 +106,7 @@ void bst::putItems(int** r, node** tree, string* words, int i, int j) {
 		// 5. 노드의 오른쪽 자식 노드(가상 키 x)를 삽입
 		if (r[p + 1][j] != 0)
 		{
-			cout << "현재 키: " << data->data << endl;
-			data->right_child = tree[r[p + 1][j]];
-			cout << "키 " << data->data << "의 오른쪽 키: " << (data->right_child)->data << endl;
+			data->insertRightChild(tree[r[p + 1][j]]);
 		}
 	}
 

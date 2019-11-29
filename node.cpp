@@ -1,11 +1,6 @@
 #include "node.h"
 
 // »ý¼ºÀÚ
-node::node() {
-	this->data = "";
-	this->left_child = NULL;
-	this->right_child = NULL;
-}
 
 node::node(string data, node* left, node* right)
 {
@@ -14,13 +9,17 @@ node::node(string data, node* left, node* right)
 	this->right_child = right;
 }
 
+void node::insertData(string data)
+{
+	this->data = data;
+}
+
 void node::insertLeftChild(node* left)
 {
-
+	this->left_child = left;
 }
 
 void node::insertRightChild(node* right)
 {
-
-
+	this->right_child = right;
 }
